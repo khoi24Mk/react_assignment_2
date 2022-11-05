@@ -13,6 +13,11 @@ body {
   padding: 0;
 }
 
+
+.refetch-btn{
+    margin: 10px;
+}
+
 .Gallery{
 
     display: flex;

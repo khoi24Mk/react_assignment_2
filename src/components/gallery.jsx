@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { QueryClient, QueryClientProvider } from "react-query";
+import React, { useState } from "react";
 import { useQuery } from "react-query";
 import "../styles.css";
 
@@ -9,23 +8,17 @@ import Carousel from "react-bootstrap/Carousel";
 
 import request from "../utils/request";
 function Gallery({ onImgClick, getImg }) {
-  const [memes, setMemes] = useState([]);
+  const { data, status, refetch } = useQuery("meme", () =>
+    request.get("/get_memes")
+  );
 
-  const { data, status } = useQuery("meme", () => request.get("/get_memes"));
-
-  //   if (statu) {
-  //     return <h1>Loading</h1>;
-  //   }
-
-  //   console.log("data: " + data);
   console.log("status: " + status);
   return (
     <div>
       <Button
-        variant="secondary"
-        onClick={() => {
-          window.location.reload();
-        }}
+        variant="outline-primary"
+        className="refetch-btn"
+        onClick={refetch}
       >
         Hello
       </Button>
